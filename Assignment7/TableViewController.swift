@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  Assignment7
 //
-//  Created by Kazunobu Someya on 2021-01-13.
+//  Created by Kazunobu Someya on 2021-01-14.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class TableViewController: UITableViewController {
+
     let navigationUIView: UIView = {
         let ngv = UIView()
         // Refer to "UIColor+NavigationBarColor.swift"
@@ -97,11 +97,16 @@ class ViewController: UIViewController {
     // set up stackview for 5 images
     func setupStackView() {
         navigationUIView.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: navigationUIView.topAnchor, constant: heightConstraint.constant).isActive = true
+        stackView.topAnchor.constraint(equalTo: navigationUIView.topAnchor, constant: 50).isActive = true
         stackView.bottomAnchor.constraint(equalTo: navigationUIView.bottomAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo:  navigationUIView.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: navigationUIView.trailingAnchor).isActive = true
     }
+    
+    
+    
+    
+    
     
     
     // Reference are as follows:
@@ -123,38 +128,32 @@ class ViewController: UIViewController {
 //            self.navigationUIView.layoutIfNeeded()
 //        }, completion: nil)
         
-        print(isRotated)
+
         // Second Solution
         let customView = sender
+
         if self.isRotated == false {
-            
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
-//                let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-                let rotateTransform = CGAffineTransform(rotationAngle: 90 * .pi/180)
+
+                let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+//                let rotateTransform = CGAffineTransform(rotationAngle: 90 * .pi/180)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 200
                 self.stackView.isHidden = false
+            }, completion: {(_) in
                 self.isRotated = true
-                print(self.isRotated)
-            }, completion: nil)
-//            }, completion: {(finished) in
-//                self.isRotated = true
-//            })
-            
+            })
         } else {
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
-                customView.transform = CGAffineTransform.identity
-//                let rotateTransform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi/4))
-//                customView.transform = rotateTransform
+//                customView.transform = CGAffineTransform.identity
+                let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
+                customView.transform = rotateTransform
                 self.heightConstraint.constant = 88
                 self.stackView.isHidden = true
+            }, completion: {(_) in
                 self.isRotated = false
-                print(self.isRotated)
-            }, completion: nil)
-//            }, completion: {(_) in
-//                self.isRotated = false
-//
-//            })
+
+            })
         }
     }
     
@@ -165,4 +164,72 @@ class ViewController: UIViewController {
         navigationUIView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         navigationUIView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 4
+    }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
