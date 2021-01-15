@@ -18,7 +18,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let addBtn: UIButton = {
         let add = UIButton(type: .system)
-        add.setTitle("➕", for: .normal)
+        add.setTitle("+", for: .normal)
+        add.setTitleColor(.systemBlue, for: .normal)
         add.titleLabel?.font = UIFont(name: "Georgia", size: 40)
         return add
     }()
@@ -31,7 +32,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         btn.setBackgroundImage(image, for: .normal)
         btn.tag = 0
         btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
         btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
         return btn
     }()
@@ -42,7 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         btn.setBackgroundImage(image, for: .normal)
         btn.tag = 1
         btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
         btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
         return btn
     }()
@@ -53,7 +54,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         btn.setBackgroundImage(image, for: .normal)
         btn.tag = 2
         btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
         btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
         return btn
     }()
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         btn.setBackgroundImage(image, for: .normal)
         btn.tag = 3
         btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
         btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
         return btn
     }()
@@ -75,7 +76,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         btn.setBackgroundImage(image, for: .normal)
         btn.tag = 4
         btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 150).isActive = true
         btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
         return btn
     }()
@@ -95,8 +96,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return tbv
     }()
     
-    lazy var heightConstraint = navigationUIView.heightAnchor.constraint(equalToConstant: 88)
-    lazy var topAnchorConstraint = myTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 88)
+    lazy var heightConstraint = navigationUIView.heightAnchor.constraint(equalToConstant: 44)
+    lazy var topAnchorConstraint = myTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 44)
     var isRotated: Bool = false //
     var myTableView: UITableView!
     var cellId = "cell"
@@ -169,8 +170,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 2)
                 customView.transform = rotateTransform
-                self.heightConstraint.constant = 88
-                self.topAnchorConstraint.constant = 88
+                self.heightConstraint.constant = 44
+                self.topAnchorConstraint.constant = 44
                 self.stackView.isHidden = true
             }, completion: {(_) in
                 self.isRotated = false
