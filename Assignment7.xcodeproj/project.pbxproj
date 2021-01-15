@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FA6A708F25AF773E003F395F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A708E25AF773E003F395F /* ViewController.swift */; };
-		FA6A709225B0EF0B003F395F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A709125B0EF0B003F395F /* TableViewController.swift */; };
 		FAC6BC2525AE5B4E0086151D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6BC2425AE5B4E0086151D /* AppDelegate.swift */; };
 		FAC6BC2725AE5B4E0086151D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6BC2625AE5B4E0086151D /* SceneDelegate.swift */; };
 		FAC6BC2E25AE5B520086151D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAC6BC2D25AE5B520086151D /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 
 /* Begin PBXFileReference section */
 		FA6A708E25AF773E003F395F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FA6A709125B0EF0B003F395F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		FAC6BC2125AE5B4E0086151D /* Assignment7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC6BC2425AE5B4E0086151D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAC6BC2625AE5B4E0086151D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +37,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FAA657C125B131BD00C1A348 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FAA657C225B131CC00C1A348 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FAA657C225B131CC00C1A348 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FAC6BC3D25AE74470086151D /* UIColor+NavigationBarColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		FAC6BC1825AE5B4E0086151D = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +72,13 @@
 		FAC6BC2325AE5B4E0086151D /* Assignment7 */ = {
 			isa = PBXGroup;
 			children = (
-				FAC6BC3D25AE74470086151D /* UIColor+NavigationBarColor.swift */,
+				FAA657C125B131BD00C1A348 /* Utils */,
 				FAC6BC2425AE5B4E0086151D /* AppDelegate.swift */,
 				FAC6BC2625AE5B4E0086151D /* SceneDelegate.swift */,
+				FA6A708E25AF773E003F395F /* ViewController.swift */,
 				FAC6BC2D25AE5B520086151D /* Assets.xcassets */,
 				FAC6BC2F25AE5B520086151D /* LaunchScreen.storyboard */,
 				FAC6BC3225AE5B520086151D /* Info.plist */,
-				FA6A708E25AF773E003F395F /* ViewController.swift */,
-				FA6A709125B0EF0B003F395F /* TableViewController.swift */,
 			);
 			path = Assignment7;
 			sourceTree = "<group>";
@@ -142,7 +155,6 @@
 				FAC6BC2525AE5B4E0086151D /* AppDelegate.swift in Sources */,
 				FAC6BC2725AE5B4E0086151D /* SceneDelegate.swift in Sources */,
 				FA6A708F25AF773E003F395F /* ViewController.swift in Sources */,
-				FA6A709225B0EF0B003F395F /* TableViewController.swift in Sources */,
 				FAC6BC3E25AE74470086151D /* UIColor+NavigationBarColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
     let navigationUIView: UIView = {
         let ngv = UIView()
         // Refer to "UIColor+NavigationBarColor.swift"
@@ -77,9 +77,16 @@ class ViewController: UIViewController {
         return stack
     }()
     
+    let tableView: UITableView = {
+        let tbv = UITableView()
+        return tbv
+    }()
+    
     lazy var heightConstraint = navigationUIView.heightAnchor.constraint(equalToConstant: 88)
     var isRotated: Bool = false //
-//    var isShown: Bool = false
+    var myTableView: UITableView!
+    var cellId = "cell"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +99,7 @@ class ViewController: UIViewController {
         addBtn.addTarget(self, action: #selector(addNewItem(_ :)), for: .touchUpInside)
         let barBtn: UIBarButtonItem = UIBarButtonItem(customView: addBtn)
         navigationItem.setRightBarButton(barBtn, animated: true)
+        setupUITableView()
     }
     
     // set up stackview for 5 images
@@ -103,58 +111,32 @@ class ViewController: UIViewController {
         stackView.trailingAnchor.constraint(equalTo: navigationUIView.trailingAnchor).isActive = true
     }
     
-    
     // Reference are as follows:
     // https://stackoverflow.com/questions/49307990/animate-rotate-uibarbuttonitem-custom-buttons
     // https://stackoverflow.com/questions/25649926/trying-to-animate-a-constraint-in-swift/25650669
     // https://www.youtube.com/watch?app=desktop&v=GTPxE_J-jIY
     @objc func addNewItem(_ sender: UIButton) {
-
-// First solution
-//        isRotated = !isRotated
-//
-//        heightConstraint.constant = isRotated ? 200.0 : 88.0
-//        stackView.isHidden = isRotated ? false : true
-//
-//        UIView.animate(withDuration: 1.0, animations: {
-//            let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-////            let rotateTransform = CGAffineTransform(rotationAngle: 90 * .pi/180)
-//            sender.transform = rotateTransform
-//            self.navigationUIView.layoutIfNeeded()
-//        }, completion: nil)
-        
-        print(isRotated)
         // Second Solution
         let customView = sender
         if self.isRotated == false {
-            
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
-//                let rotateTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi/4))
-                let rotateTransform = CGAffineTransform(rotationAngle: 90 * .pi/180)
+                let rotateTransform = CGAffineTransform(rotationAngle: .pi / 3.7)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 200
                 self.stackView.isHidden = false
+//                print(self.isRotated)
+            }, completion: {(finished) in
                 self.isRotated = true
-                print(self.isRotated)
-            }, completion: nil)
-//            }, completion: {(finished) in
-//                self.isRotated = true
-//            })
-            
+            })
         } else {
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
-                customView.transform = CGAffineTransform.identity
-//                let rotateTransform = CGAffineTransform(rotationAngle: -CGFloat(Double.pi/4))
-//                customView.transform = rotateTransform
+                let rotateTransform = CGAffineTransform(rotationAngle: .pi / 2)
+                customView.transform = rotateTransform
                 self.heightConstraint.constant = 88
                 self.stackView.isHidden = true
+            }, completion: {(_) in
                 self.isRotated = false
-                print(self.isRotated)
-            }, completion: nil)
-//            }, completion: {(_) in
-//                self.isRotated = false
-//
-//            })
+            })
         }
     }
     
@@ -164,5 +146,30 @@ class ViewController: UIViewController {
         heightConstraint.isActive = true
         navigationUIView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         navigationUIView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+    
+    func setupUITableView() {
+        myTableView = UITableView()
+        self.view.addSubview(myTableView)
+        myTableView.translatesAutoresizingMaskIntoConstraints = false
+        myTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        myTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        myTableView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        myTableView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        myTableView.dataSource = self
+        myTableView.delegate = self
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        cell.textLabel?.text = "row"
+        return cell
     }
 }
