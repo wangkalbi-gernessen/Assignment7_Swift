@@ -19,52 +19,65 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let addBtn: UIButton = {
         let add = UIButton(type: .system)
         add.setTitle("➕", for: .normal)
+        add.titleLabel?.font = UIFont(name: "Georgia", size: 40)
         return add
     }()
     
-    let imageView1: UIImageView = {
-        let imageName = "oreos"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        return imageView
+    // Reference is https://stackoverflow.com/questions/39646049/swift-button-background-image-not-appearing
+    // When I add background image to uibuttons, I used above referen
+    let imageView1: UIButton = {
+        let btn = UIButton(type: .system)
+        let image = UIImage(named: "oreos")
+        btn.setBackgroundImage(image, for: .normal)
+        btn.tag = 0
+        btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
+        return btn
     }()
     
-    let imageView2: UIImageView = {
-        let imageName = "pizza_pockets"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        return imageView
+    let imageView2: UIButton = {
+        let btn = UIButton(type: .system)
+        let image = UIImage(named: "pizza_pockets")
+        btn.setBackgroundImage(image, for: .normal)
+        btn.tag = 1
+        btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
+        return btn
     }()
     
-    let imageView3: UIImageView = {
-        let imageName = "pop_tarts"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        return imageView
+    let imageView3: UIButton = {
+        let btn = UIButton(type: .system)
+        let image = UIImage(named: "pop_tarts")
+        btn.setBackgroundImage(image, for: .normal)
+        btn.tag = 2
+        btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
+        return btn
     }()
     
-    let imageView4: UIImageView = {
-        let imageName = "popsicle"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        return imageView
+    let imageView4: UIButton = {
+        let btn = UIButton(type: .system)
+        let image = UIImage(named: "popsicle")
+        btn.setBackgroundImage(image, for: .normal)
+        btn.tag = 3
+        btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
+        return btn
     }()
     
-    let imageView5: UIImageView = {
-        let imageName = "ramen"
-        let image = UIImage(named: imageName)
-        let imageView = UIImageView(image: image!)
-        imageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        return imageView
+    let imageView5: UIButton = {
+        let btn = UIButton(type: .system)
+        let image = UIImage(named: "ramen")
+        btn.setBackgroundImage(image, for: .normal)
+        btn.tag = 4
+        btn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        btn.addTarget(self, action: #selector(insertButtonsToImageView(_:)), for: .touchUpInside)
+        return btn
     }()
     
     lazy var stackView: UIStackView = {
@@ -83,10 +96,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }()
     
     lazy var heightConstraint = navigationUIView.heightAnchor.constraint(equalToConstant: 88)
+    lazy var topAnchorConstraint = myTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 88)
     var isRotated: Bool = false //
     var myTableView: UITableView!
     var cellId = "cell"
     
+    var tableViewSnacks = [String]()
+    var snacks = ["oreos","pizza_pockets","pop_tarts","popsicle","ramen"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,10 +112,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupStackView()
         stackView.isHidden = true
         navigationController?.navigationBar.barTintColor = UIColor(hexString: "#DDDDDD")
+        title = "SNACKS"
         addBtn.addTarget(self, action: #selector(addNewItem(_ :)), for: .touchUpInside)
         let barBtn: UIBarButtonItem = UIBarButtonItem(customView: addBtn)
         navigationItem.setRightBarButton(barBtn, animated: true)
         setupUITableView()
+    }
+    
+    // when buttons are clicked, image name appear on tableview cell
+    @objc func insertButtonsToImageView(_ sender : UIButton) {
+        if sender.tag == 0 {
+            self.tableViewSnacks.append(snacks[0])
+        } else if sender.tag == 1 {
+            self.tableViewSnacks.append(snacks[1])
+        } else if sender.tag == 2 {
+            self.tableViewSnacks.append(snacks[2])
+        } else if sender.tag == 3 {
+            self.tableViewSnacks.append(snacks[3])
+        } else {
+            self.tableViewSnacks.append(snacks[4])
+        }
+        myTableView.reloadData()
     }
     
     // set up stackview for 5 images
@@ -119,20 +152,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Second Solution
         let customView = sender
         if self.isRotated == false {
+            title = "Add a SNACK"
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 3.7)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 200
+                self.topAnchorConstraint.constant = 200
                 self.stackView.isHidden = false
 //                print(self.isRotated)
             }, completion: {(finished) in
                 self.isRotated = true
             })
         } else {
+            title = "SNACK"
             UIView.animate(withDuration: 0.5, delay: 1.0, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 2)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 88
+                self.topAnchorConstraint.constant = 88
                 self.stackView.isHidden = true
             }, completion: {(_) in
                 self.isRotated = false
@@ -152,24 +189,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView = UITableView()
         self.view.addSubview(myTableView)
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        myTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        
+        
         myTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         myTableView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         myTableView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
+        topAnchorConstraint.isActive = true
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         myTableView.dataSource = self
         myTableView.delegate = self
-        
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return tableViewSnacks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = "row"
+        cell.textLabel?.text = "\(tableViewSnacks[indexPath.row])"
         return cell
     }
 }
