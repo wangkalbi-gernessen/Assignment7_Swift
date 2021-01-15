@@ -101,6 +101,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var myTableView: UITableView!
     var cellId = "cell"
     
+    // I made following empty array to append new image name per a click
     var tableViewSnacks = [String]()
     var snacks = ["oreos","pizza_pockets","pop_tarts","popsicle","ramen"]
     
@@ -189,8 +190,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView = UITableView()
         self.view.addSubview(myTableView)
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
         myTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         myTableView.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         myTableView.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
