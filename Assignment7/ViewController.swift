@@ -155,24 +155,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let customView = sender
         if self.isRotated == false {
             title = "Add a SNACK"
-            UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
+            UIView.animate(withDuration: 3.0, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 3.7)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 200
                 self.topAnchorConstraint.constant = 200
                 self.stackView.isHidden = false
-//                print(self.isRotated)
+                self.view.layoutIfNeeded()
             }, completion: {(finished) in
                 self.isRotated = true
             })
         } else {
             title = "SNACK"
-            UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
+            UIView.animate(withDuration: 3.0, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 2)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 44
                 self.topAnchorConstraint.constant = 44
                 self.stackView.isHidden = true
+                self.view.layoutIfNeeded()
             }, completion: {(_) in
                 self.isRotated = false
             })
