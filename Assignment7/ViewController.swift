@@ -155,7 +155,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let customView = sender
         if self.isRotated == false {
             title = "Add a SNACK"
-            UIView.animate(withDuration: 3.0, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
+            UIView.animate(withDuration: 1.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.5, animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 3.7)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 200
@@ -167,7 +167,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             })
         } else {
             title = "SNACK"
-            UIView.animate(withDuration: 3.0, delay: 0.5, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.5, animations: {
+            UIView.animate(withDuration: 1.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.5,  animations: {
                 let rotateTransform = CGAffineTransform(rotationAngle: .pi / 2)
                 customView.transform = rotateTransform
                 self.heightConstraint.constant = 44
